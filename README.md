@@ -1,4 +1,8 @@
 
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colourvalues)](http://cran.r-project.org/package=colourvalues)
+![downloads](http://cranlogs.r-pkg.org/badges/grand-total/colourvalues)
+[![CRAN RStudio mirror
+downloads](http://cranlogs.r-pkg.org/badges/colourvalues)](http://cran.r-project.org/web/packages/colourvalues/index.html)
 [![Travis-CI Build
 Status](https://travis-ci.org/SymbolixAU/colourvalues.svg?branch=master)](https://travis-ci.org/SymbolixAU/colourvalues)
 [![Coverage
@@ -53,7 +57,13 @@ But don’t worry, `color_values(1:5)` works as well
 
 ### How do I install it?
 
-Install the development version from
+From CRAN
+
+``` r
+install.packages("colourvalues")
+```
+
+Or install the development version from
 [GitHub](https://github.com/SymbolixAU/colourvalues) with:
 
 ``` r
@@ -68,7 +78,7 @@ devtools::install_github("SymbolixAU/colourvalues")
 **Rcpp**
 
 All functions are written in `Rcpp`. I have exposed some of them in
-header files so you can `LinkTo` them in your package.
+header files so you can “link to” them in your package.
 
 For example, the `LinkingTo` section in `DESCRIPTION` will look
 something like
@@ -104,7 +114,7 @@ df$col <- colour_values(df$x, palette = "viridis")
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" height="200" />
 
 #### 5000 numbers on a non-linear scale
 
@@ -114,7 +124,7 @@ df$col <- colour_values(df$x, palette = "viridis")
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" height="200" />
 
 #### 1000 random numbers
 
@@ -124,7 +134,7 @@ df$col <- colour_values(df$x, palette = "inferno")
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" height="200" />
 
 Eurgh\!
 
@@ -133,7 +143,7 @@ df <- df[with(df, order(x)), ]
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" height="200" />
 
 That’s better\!
 
@@ -152,7 +162,7 @@ df$col <- colour_values(df$x, palette = m)
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" height="200" />
 
 ## Do you support ‘alpha’ values
 
@@ -165,7 +175,7 @@ df$col <- colour_values(df$x, alpha = 50)
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" height="200" />
 
 Or use a vector of values the same length as `x`
 
@@ -175,7 +185,7 @@ df$col <- colour_values(df$x, alpha = df$y)
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" height="200" />
 
 Or include the alpha value as a 4th column in the palette matrix
 
@@ -189,7 +199,7 @@ df$col <- colour_values(df$x, palette = m)
 barplot(height = df$a, col = df$col, border = NA, space = 0)
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" height="200" />
 
 ## Some of my plotting functions don’t support alpha, can I exclude it?
 
@@ -205,6 +215,107 @@ colour_values_rgb(1:5, include_alpha = F)
 # [3,]   33  144  140
 # [4,]   93  201   99
 # [5,]  253  231   37
+```
+
+## Can I get a summary of colours to use in a legend?
+
+Yes, for numeric values use the `n_summaries` argument to specify the
+number of summary values you’d like
+
+``` r
+colour_values(1:10, n_summaries = 3)
+# $colours
+#  [1] "#440154FF" "#482878FF" "#3E4A89FF" "#31688EFF" "#26838EFF"
+#  [6] "#1F9D89FF" "#35B779FF" "#6CCE59FF" "#B4DD2CFF" "#FDE725FF"
+# 
+# $summary_values
+# [1] "1.00"  "5.50"  "10.00"
+# 
+# $summary_colours
+# [1] "#440154FF" "#21908CFF" "#FDE725FF"
+```
+
+You can also specify the number of digits you’d like returned in the
+summary
+
+``` r
+colour_values(rnorm(n = 10), n_summaries = 3, digits = 2)
+# $colours
+#  [1] "#20918CFF" "#98D83EFF" "#26838EFF" "#B3DD2CFF" "#B3DD2DFF"
+#  [6] "#2C738EFF" "#FDE725FF" "#355E8DFF" "#B7DE2AFF" "#440154FF"
+# 
+# $summary_values
+# [1] "-2.76" "-1.17" "0.41" 
+# 
+# $summary_colours
+# [1] "#440154FF" "#21908CFF" "#FDE725FF"
+```
+
+You can also use `format = FALSE` if you don’t want the summary values
+formatted.
+
+``` r
+dte <- seq(as.Date("2018-01-01"), as.Date("2018-02-01"), by = 1)
+colour_values(dte, n_summaries = 3)
+# $colours
+#  [1] "#440154FF" "#470D60FF" "#48196BFF" "#482474FF" "#472E7CFF"
+#  [6] "#453882FF" "#414286FF" "#3E4B8AFF" "#3A548CFF" "#365D8DFF"
+# [11] "#32658EFF" "#2E6D8EFF" "#2B758EFF" "#287D8EFF" "#25858EFF"
+# [16] "#228C8DFF" "#20948CFF" "#1E9C89FF" "#20A386FF" "#25AB82FF"
+# [21] "#2DB27DFF" "#39BA76FF" "#48C16EFF" "#58C765FF" "#6ACD5BFF"
+# [26] "#7ED34FFF" "#92D742FF" "#A8DB34FF" "#BEDF26FF" "#D4E21BFF"
+# [31] "#E9E41AFF" "#FDE725FF"
+# 
+# $summary_values
+# [1] "2018-01-01" "2018-01-16" "2018-02-01"
+# 
+# $summary_colours
+# [1] "#440154FF" "#21908CFF" "#FDE725FF"
+
+colour_values(dte, n_summaries = 3, format = F)
+# $colours
+#  [1] "#440154FF" "#470D60FF" "#48196BFF" "#482474FF" "#472E7CFF"
+#  [6] "#453882FF" "#414286FF" "#3E4B8AFF" "#3A548CFF" "#365D8DFF"
+# [11] "#32658EFF" "#2E6D8EFF" "#2B758EFF" "#287D8EFF" "#25858EFF"
+# [16] "#228C8DFF" "#20948CFF" "#1E9C89FF" "#20A386FF" "#25AB82FF"
+# [21] "#2DB27DFF" "#39BA76FF" "#48C16EFF" "#58C765FF" "#6ACD5BFF"
+# [26] "#7ED34FFF" "#92D742FF" "#A8DB34FF" "#BEDF26FF" "#D4E21BFF"
+# [31] "#E9E41AFF" "#FDE725FF"
+# 
+# $summary_values
+# [1] 17532.0 17547.5 17563.0
+# 
+# $summary_colours
+# [1] "#440154FF" "#21908CFF" "#FDE725FF"
+```
+
+For categorical values use `summary = TRUE` to return a uniqe set of the
+values, and their associated colours
+
+``` r
+colour_values(sample(letters, size = 50, replace = T), summary = T)
+# $colours
+#  [1] "#440154FF" "#31688EFF" "#C7E020FF" "#481F71FF" "#FDE725FF"
+#  [6] "#472D7BFF" "#472D7BFF" "#3B528BFF" "#471163FF" "#E3E418FF"
+# [11] "#8FD744FF" "#E3E418FF" "#472D7BFF" "#2C728EFF" "#20A486FF"
+# [16] "#ABDC32FF" "#2C728EFF" "#24868EFF" "#35B779FF" "#28AE80FF"
+# [21] "#ABDC32FF" "#E3E418FF" "#24868EFF" "#31688EFF" "#47C06FFF"
+# [26] "#20A486FF" "#404688FF" "#24868EFF" "#28AE80FF" "#443A83FF"
+# [31] "#47C06FFF" "#3B528BFF" "#75D054FF" "#404688FF" "#404688FF"
+# [36] "#481F71FF" "#287C8EFF" "#20A486FF" "#5DC963FF" "#ABDC32FF"
+# [41] "#1F9A8AFF" "#443A83FF" "#355D8DFF" "#28AE80FF" "#E3E418FF"
+# [46] "#28AE80FF" "#8FD744FF" "#21908CFF" "#28AE80FF" "#8FD744FF"
+# 
+# $summary_values
+#  [1] "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "m" "n" "o" "p" "q" "r"
+# [18] "s" "t" "u" "v" "w" "x" "y" "z"
+# 
+# $summary_colours
+#  [1] "#440154FF" "#471163FF" "#481F71FF" "#472D7BFF" "#443A83FF"
+#  [6] "#404688FF" "#3B528BFF" "#355D8DFF" "#31688EFF" "#2C728EFF"
+# [11] "#287C8EFF" "#24868EFF" "#21908CFF" "#1F9A8AFF" "#20A486FF"
+# [16] "#28AE80FF" "#35B779FF" "#47C06FFF" "#5DC963FF" "#75D054FF"
+# [21] "#8FD744FF" "#ABDC32FF" "#C7E020FF" "#E3E418FF" "#FDE725FF"
 ```
 
 -----
@@ -235,14 +346,14 @@ m <- microbenchmark(
 m
 # Unit: seconds
 #          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 3.266914 3.339435 3.436595 3.361934 3.431414 4.663519    25
-#        scales 6.087997 6.162716 6.330125 6.267859 6.419875 6.995375    25
+#  colourvalues 1.617392 1.650307 1.707740 1.688513 1.757597 1.866051    25
+#        scales 2.772918 2.889632 2.958089 2.922623 3.016068 3.344712    25
 
 autoplot(m)
 # Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" height="400" />
+<img src="man/figures/README-unnamed-chunk-16-1.png" width="100%" height="400" />
 
 **1 million characters (26 unique values)**
 
@@ -264,11 +375,11 @@ m <- microbenchmark(
 m
 # Unit: milliseconds
 #          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 339.4102 356.4007 362.2794 363.3380 367.3415 404.4670    25
-#        scales 627.1125 644.6090 668.4481 651.7019 689.1078 763.3574    25
+#  colourvalues 183.6266 191.3288 196.3723 192.1881 192.8737 304.3512    25
+#        scales 288.9669 311.4043 320.7450 313.7732 318.0472 378.1733    25
 
 autoplot(m)
 # Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" height="400" />
+<img src="man/figures/README-unnamed-chunk-17-1.png" width="100%" height="400" />
