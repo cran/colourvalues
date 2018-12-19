@@ -1,4 +1,11 @@
-# colourvalues 0.2.0
+# v0.2.1
+
+* `show_colours()` to plot all colour palettes
+* added more colour palettes. Use `colour_palettes()` to list them
+* fix NA values in summary [issue 39](https://github.com/SymbolixAU/colourvalues/issues/39)
+* alpha now accepts fewer than 5 values when using a vector
+
+# v0.2.0
 
 * `format`, `summary`, `n_summaries` arguments for returning summary colours (for use in legends)
 * `convert_colours()` function exposed to R to convert between hex-rgb [issue 14](https://github.com/SymbolixAU/colourvalues/issues/14)
