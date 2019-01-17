@@ -2,18 +2,20 @@
 #'
 #' Maps colours to variables, returning a matrix of RGB(A) values
 #'
-#' @param x vector of values to map to a colour
-#' @param palette colour palette. See details and examples
-#' @param na_colour hex string colour to use for NA values in the form \code{#RRGGBBAA}.
-#' @param alpha optional. Single value in [0,255] applied to all colours, or
-#' a vector of numeric values the same length as \code{x} and at least length 5.
-#' The numeric vector will be scaled into the range [0,255].
-#' If a matrix palette is supplied this argument is ignored.
-#' @param include_alpha logical indicating if the returned hex or matrix should include
-#' the alpha values. Defaults to \code{TRUE}.
-#' @param ... other arguments possed to methods
+#' @inheritParams colour_values
 #'
 #' @seealso colour_values
+#'
+#' @details
+#'
+#' The palette can either be
+#' \itemize{
+#'   \item{String - }{use \code{colour_palettes()} to view available palettes}
+#'   \item{Matrix - }{At least 5 rows, and 3 (or 4) columns representing the red, green and blue (and alpha) values}
+#' }
+#'
+#' The matrix \code{palette} requires 5 rows because the colours are interpolated using a
+#' cubic b-spline. This method requires 5 values.
 #'
 #' @examples
 #'

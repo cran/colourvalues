@@ -46,8 +46,9 @@ color_values(x, palette = "viridis", na_colour = "#808080FF",
 
 \item{na_colour}{hex string colour to use for NA values in the form \code{#RRGGBBAA}.}
 
-\item{alpha}{optional. Single value in [0,255] applied to all colours, or
-a vector of numeric values the same length as \code{x} and at least length 5.
+\item{alpha}{optional. Single value in [0,255] applied to all colours,
+or a decimal in [0, 1) (to indicate a percentage, noting 1 is excluded),
+or a vector of numeric values the same length as \code{x}.
 The numeric vector will be scaled into the range [0,255].
 If a matrix palette is supplied this argument is ignored.}
 
@@ -74,11 +75,11 @@ maps colours to values
 \details{
 The palette can either be
 \itemize{
-  \item{String - }{"viridis", "inferno", "plasma", "magma", "cividis"}
+  \item{String - }{use \code{colour_palettes()} to view available palettes}
   \item{Matrix - }{At least 5 rows, and 3 (or 4) columns representing the red, green and blue (and alpha) values}
 }
 
-The \code{palette} requires 5 rows because the colours are interpolated using a
+The matrix \code{palette} requires 5 rows because the colours are interpolated using a
 cubic b-spline. This method requires 5 values.
 
 when \code{summary = TRUE}, the following rules are applied to the summary values
@@ -101,6 +102,7 @@ colour_values(x = 1:5, palette = "inferno")
 colour_values(x = 1:5, palette = "plasma")
 colour_values(x = 1:5, palette = "magma")
 colour_values(x = 1:5, palette = "cividis")
+colour_values(x = 1:5, palette = "rainbow")
 
 ## matrix palette
 n <- 100
