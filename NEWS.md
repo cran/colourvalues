@@ -1,3 +1,11 @@
+# v0.3
+
+* `get_palette()` for returning 256x3 matrix of colorus
+* factor-level order maintained in summary
+* lists supported
+* Added palette row check function inside .hpp files 
+* BH -DBOOST_NO_AUTO_PTR flag
+
 # v0.2.2
 
 * [0,1) alpha values treated as percentage [issue 37](https://github.com/SymbolixAU/colourvalues/issues/37)

@@ -1,8 +1,8 @@
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colourvalues)](http://cran.r-project.org/package=colourvalues)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colourvalues)](https://CRAN.R-project.org/package=colourvalues)
 ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/colourvalues)
 [![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/colourvalues)](http://cran.r-project.org/web/packages/colourvalues/index.html)
+downloads](http://cranlogs.r-pkg.org/badges/colourvalues)](https://CRAN.R-project.org/package=colourvalues)
 [![Travis-CI Build
 Status](https://travis-ci.org/SymbolixAU/colourvalues.svg?branch=master)](https://travis-ci.org/SymbolixAU/colourvalues)
 [![Coverage
@@ -13,6 +13,8 @@ Stars](https://img.shields.io/github/stars/SymbolixAU/colourvalues.svg?style=soc
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # colourvalues
+
+<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" height="200" />
 
 -----
 
@@ -89,12 +91,21 @@ LinkingTo:
     colourvalues
 ```
 
-And in a **c++** source file so you can `#include` a header and use the
-available functions
+And in a **c++** source file so you can `#include` the API header
 
 ``` cpp
-#include "colourvalues/colours/colours_hex.hpp"
+#include "colourvalues/api.hpp"
 // [[Rcpp::depends(colourvalues)]]
+```
+
+And call
+
+``` cpp
+// return hex colours
+colourvalues::api::colour_values_hex()
+
+// return RGP matrix
+colourvalues::api::colour_values_rgb()
 ```
 
 **R**
@@ -117,7 +128,7 @@ df$col <- colour_values(df$x, palette = "viridis")
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" height="200" />
 
 #### 5000 numbers on a non-linear scale
 
@@ -127,7 +138,7 @@ df$col <- colour_values(df$x, palette = "viridis")
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" height="200" />
 
 #### 1000 random numbers
 
@@ -137,7 +148,7 @@ df$col <- colour_values(df$x, palette = "inferno")
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" height="200" />
 
 Eurgh\!
 
@@ -146,7 +157,7 @@ df <- df[with(df, order(x)), ]
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" height="200" />
 
 That’s better\!
 
@@ -174,14 +185,13 @@ colour_palettes()
 ```
 
 And you can use `show_colours()` to view them all. Here’s what some of
-them look
-like
+them look like
 
 ``` r
 show_colours( colours = colour_palettes(c("viridis", "colorspace")))
 ```
 
-<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" height="200" />
 
 ## Do I have to use the in-built palettes?
 
@@ -196,7 +206,7 @@ df$col <- colour_values(df$x, palette = m)
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" height="200" />
 
 ## Do you support ‘alpha’ values
 
@@ -209,7 +219,7 @@ df$col <- colour_values(df$x, alpha = 50)
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-10-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" height="200" />
 
 Or use a vector of values the same length as `x`
 
@@ -219,7 +229,7 @@ df$col <- colour_values(df$x, alpha = df$y)
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-11-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" height="200" />
 
 Or include the alpha value as a 4th column in the palette matrix
 
@@ -233,7 +243,7 @@ df$col <- colour_values(df$x, palette = m)
 bar_plot( df )
 ```
 
-<img src="man/figures/README-unnamed-chunk-12-1.png" width="100%" height="200" />
+<img src="man/figures/README-unnamed-chunk-13-1.png" width="100%" height="200" />
 
 ## Some of my plotting functions don’t support alpha, can I exclude it?
 
@@ -275,11 +285,11 @@ summary
 ``` r
 colour_values(rnorm(n = 10), n_summaries = 3, digits = 2)
 # $colours
-#  [1] "#27AD81FF" "#3F4989FF" "#39568CFF" "#218F8DFF" "#228C8DFF"
-#  [6] "#FDE725FF" "#440154FF" "#3F4889FF" "#453681FF" "#26818EFF"
+#  [1] "#FDE725FF" "#3F4888FF" "#38578CFF" "#3C508BFF" "#2B768EFF"
+#  [6] "#2A778EFF" "#463580FF" "#440154FF" "#287C8EFF" "#2A778EFF"
 # 
 # $summary_values
-# [1] "-1.21" "0.71"  "2.62" 
+# [1] "-1.78" "0.53"  "2.84" 
 # 
 # $summary_colours
 # [1] "#440154FF" "#21908CFF" "#FDE725FF"
@@ -329,20 +339,20 @@ values, and their associated colours
 ``` r
 colour_values(sample(letters, size = 50, replace = T), summary = T)
 # $colours
-#  [1] "#2F6C8EFF" "#2FB47CFF" "#482575FF" "#2F6C8EFF" "#43BF71FF"
-#  [6] "#3B528BFF" "#414487FF" "#2FB47CFF" "#43BF71FF" "#5DC963FF"
-# [11] "#5DC963FF" "#2F6C8EFF" "#7AD151FF" "#345F8DFF" "#7AD151FF"
-# [16] "#7AD151FF" "#482575FF" "#25848EFF" "#1E9C89FF" "#2A788EFF"
-# [21] "#9AD93DFF" "#3B528BFF" "#481466FF" "#7AD151FF" "#22A884FF"
-# [26] "#5DC963FF" "#21908CFF" "#FDE725FF" "#21908CFF" "#DDE318FF"
-# [31] "#463480FF" "#21908CFF" "#25848EFF" "#2F6C8EFF" "#481466FF"
-# [36] "#25848EFF" "#440154FF" "#BCDF27FF" "#345F8DFF" "#25848EFF"
-# [41] "#440154FF" "#FDE725FF" "#440154FF" "#43BF71FF" "#1E9C89FF"
-# [46] "#22A884FF" "#2F6C8EFF" "#BCDF27FF" "#DDE318FF" "#463480FF"
+#  [1] "#482575FF" "#440154FF" "#345F8DFF" "#DDE318FF" "#22A884FF"
+#  [6] "#43BF71FF" "#7AD151FF" "#25848EFF" "#21908CFF" "#440154FF"
+# [11] "#DDE318FF" "#482575FF" "#463480FF" "#7AD151FF" "#414487FF"
+# [16] "#5DC963FF" "#2A788EFF" "#DDE318FF" "#25848EFF" "#FDE725FF"
+# [21] "#BCDF27FF" "#414487FF" "#FDE725FF" "#1E9C89FF" "#482575FF"
+# [26] "#414487FF" "#21908CFF" "#7AD151FF" "#481466FF" "#2A788EFF"
+# [31] "#481466FF" "#414487FF" "#345F8DFF" "#3B528BFF" "#481466FF"
+# [36] "#5DC963FF" "#481466FF" "#5DC963FF" "#43BF71FF" "#9AD93DFF"
+# [41] "#BCDF27FF" "#414487FF" "#43BF71FF" "#43BF71FF" "#FDE725FF"
+# [46] "#463480FF" "#440154FF" "#2F6C8EFF" "#2A788EFF" "#2FB47CFF"
 # 
 # $summary_values
-#  [1] "a" "b" "c" "e" "f" "g" "h" "i" "j" "k" "m" "o" "p" "q" "r" "s" "t"
-# [18] "u" "x" "y" "z"
+#  [1] "a" "c" "d" "e" "f" "g" "h" "j" "k" "m" "n" "p" "q" "r" "s" "t" "v"
+# [18] "w" "x" "y" "z"
 # 
 # $summary_colours
 #  [1] "#440154FF" "#481466FF" "#482575FF" "#463480FF" "#414487FF"
@@ -350,6 +360,48 @@ colour_values(sample(letters, size = 50, replace = T), summary = T)
 # [11] "#21908CFF" "#1E9C89FF" "#22A884FF" "#2FB47CFF" "#43BF71FF"
 # [16] "#5DC963FF" "#7AD151FF" "#9AD93DFF" "#BCDF27FF" "#DDE318FF"
 # [21] "#FDE725FF"
+```
+
+### I see you support lists, but how does it work?
+
+Basically, it’s the same as un-listing the list to create a vector of
+all the values, then colouring them.
+
+So if your list contains different types, it will coerce all values to
+the same type and colour them.
+
+But it returns a list of the same structure.
+
+For example,
+
+``` r
+
+l <- list( x = 1:5, y = list(z = letters[1:5] ) )
+colour_values( l )
+# [[1]]
+# [1] "#440154FF" "#482878FF" "#3E4A89FF" "#31688EFF" "#26838EFF"
+# 
+# [[2]]
+# [[2]][[1]]
+# [1] "#1F9D89FF" "#35B779FF" "#6CCE59FF" "#B4DD2CFF" "#FDE725FF"
+
+x <- c( 1:5, letters[1:5] )
+colour_values( x )
+#  [1] "#440154FF" "#482878FF" "#3E4A89FF" "#31688EFF" "#26838EFF"
+#  [6] "#1F9D89FF" "#35B779FF" "#6CCE59FF" "#B4DD2CFF" "#FDE725FF"
+```
+
+What it doesn’t do is treat each list element independently. For this
+you would use
+
+``` r
+lapply( l, colour_values ) 
+# $x
+# [1] "#440154FF" "#3B528BFF" "#21908CFF" "#5DC963FF" "#FDE725FF"
+# 
+# $y
+# $y[[1]]
+# [1] "#440154FF" "#3B528BFF" "#21908CFF" "#5DC963FF" "#FDE725FF"
 ```
 
 -----
@@ -374,15 +426,15 @@ m <- microbenchmark(
 )
 m
 # Unit: seconds
-#          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 1.617036 1.629365 1.682938 1.645191 1.745641 1.800155    25
-#        scales 2.820961 2.916128 3.035900 2.981311 3.140706 3.418156    25
+#          expr      min       lq     mean   median       uq       max neval
+#  colourvalues 3.339203 3.664397 4.715676 5.026010 5.257869  6.226731    25
+#        scales 6.153397 7.201396 8.834126 9.468157 9.907154 12.748400    25
 
 autoplot(m)
 # Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
-<img src="man/figures/README-unnamed-chunk-18-1.png" width="100%" height="400" />
+<img src="man/figures/README-unnamed-chunk-21-1.png" width="100%" height="400" />
 
 **1 million characters (26 unique values)**
 
@@ -403,12 +455,12 @@ m <- microbenchmark(
 )
 m
 # Unit: milliseconds
-#          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 182.1952 203.5807 206.2559 207.5844 209.7223 245.3349    25
-#        scales 329.7487 342.8897 349.5171 345.3121 345.8927 417.3716    25
+#          expr      min       lq     mean   median       uq       max neval
+#  colourvalues 447.7285 488.8479 519.8084 507.0384 526.8926  686.7764    25
+#        scales 888.0087 936.6404 972.2149 960.9733 997.1543 1133.9043    25
 
 autoplot(m)
 # Coordinate system already present. Adding new coordinate system, which will replace the existing one.
 ```
 
-<img src="man/figures/README-unnamed-chunk-19-1.png" width="100%" height="400" />
+<img src="man/figures/README-unnamed-chunk-22-1.png" width="100%" height="400" />

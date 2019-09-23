@@ -1,3 +1,23 @@
+#' Get Palette
+#'
+#' retrieves one of the available palettes
+#'
+#' @param palette one of the available paletes. See \link{colour_palettes}
+#'
+#' @examples
+#'
+#' get_palette( "viridis" )
+#' get_palette( "rainbow" )
+#'
+#' @return 256 row x 3 column matrix. Columns are in the order red, green, blue.
+#'
+#' @export
+get_palette <- function( palette ) {
+  if( !palette %in% colour_palettes() ) stop("not a valid palette")
+
+  return( rcpp_get_palette( palette ) )
+}
+
 
 #' Colour Palettes
 #'
@@ -25,7 +45,7 @@
 #'
 #' @export
 colour_palettes <- function( colours = NULL ) {
-  if( is.null( colours ) ) colours <- c("viridis","rcolorbrewer","grdevices","colorspace","colorramp")
+  if( is.null( colours ) ) colours <- c("viridis","rcolorbrewer","grdevices","colorspace","colourspace","colorramp")
   colours <- tolower(colours)
 
   return(
@@ -33,8 +53,8 @@ colour_palettes <- function( colours = NULL ) {
       if( "viridis" %in% colours ) { viridis_palettes() }
       , if( "rcolorbrewer" %in% colours ) { c( rcolorbrewer_seq_palettes(), rcolorbrewer_div_palettes() ) }
       , if( "grdevices" %in% colours ) { grdevices_palettes() }
-      , if( "colorspace" %in% colours ) { c( colorspace_seq_palettes(), colorspace_div_palettes() ) }
-      , if( "colorramp" %in% colours ) { colorramp_palettes() }
+      , if( any( grepl("colorspace|colourspace", colours ) ) ) { c( colorspace_seq_palettes(), colorspace_div_palettes() ) }
+      , if( any( grepl("colorramp|colourramp", colours ) ) ) { colorramp_palettes() }
     )
   )
 }

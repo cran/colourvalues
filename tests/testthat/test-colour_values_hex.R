@@ -169,7 +169,7 @@ test_that("original vectors returned",{
   y <- 1L:10L
   invisible( colour_values(x) )
   expect_true( all(x == y) )
-  invisible( colour_values_rgb(x))
+  invisible( colour_values_rgb(x) )
   expect_true( all(x == y))
 
   set.seed(1)
@@ -368,6 +368,4 @@ test_that("summary values contain FF alphas", {
   expect_true( all( nchar( cv$summary_colours ) == 7 ) )
   cv <- colour_values( letters, summary = T, alpha = 1:26, palette = m, include_alpha = F )
   expect_true( all( nchar( cv$summary_colours ) == 7) )
-
-
 })
