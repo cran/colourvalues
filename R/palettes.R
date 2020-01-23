@@ -3,19 +3,28 @@
 #' retrieves one of the available palettes
 #'
 #' @param palette one of the available paletes. See \link{colour_palettes}
+#' @param rgb logical indicating if the palette should be returned as an RGB matrix
+#' \code{TRUE}, or a vector of hex strings \code{FALSE}
 #'
 #' @examples
 #'
 #' get_palette( "viridis" )
 #' get_palette( "rainbow" )
 #'
-#' @return 256 row x 3 column matrix. Columns are in the order red, green, blue.
+#' @return 256 row x 3 column matrix if \code{rgb = TRUE}, otherwise a 256-length vector.
 #'
 #' @export
-get_palette <- function( palette ) {
+get_palette <- function( palette, rgb = TRUE ) {
   if( !palette %in% colour_palettes() ) stop("not a valid palette")
 
-  return( rcpp_get_palette( palette ) )
+  pal <- rcpp_get_palette( palette )
+
+  if( !rgb ) {
+    return( convert_colour( pal ) )
+  }
+
+  return( pal )
+
 }
 
 

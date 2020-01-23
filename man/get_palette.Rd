@@ -4,13 +4,16 @@
 \alias{get_palette}
 \title{Get Palette}
 \usage{
-get_palette(palette)
+get_palette(palette, rgb = TRUE)
 }
 \arguments{
 \item{palette}{one of the available paletes. See \link{colour_palettes}}
+
+\item{rgb}{logical indicating if the palette should be returned as an RGB matrix
+\code{TRUE}, or a vector of hex strings \code{FALSE}}
 }
 \value{
-256 row x 3 column matrix. Columns are in the order red, green, blue.
+256 row x 3 column matrix if \code{rgb = TRUE}, otherwise a 256-length vector.
 }
 \description{
 retrieves one of the available palettes
