@@ -6,6 +6,10 @@
 #include "colourvalues/alpha/alpha.hpp"
 //#include "colourvalues/scale/scale.hpp"
 
+//#include "colourvalues/spline.hpp" // TODO
+
+#include "cardinal_cubic_b_spline.hpp"
+//#include "boost/math/interpolators/cardinal_cubic_b_spline.hpp"
 
 namespace colourvalues {
 namespace generate_colours {
@@ -29,11 +33,13 @@ namespace generate_colours {
     Rcpp::StringVector hex_strings( n );
     double step = 1 / ( colours - 1 );  // TODO(test)
 
+    // Rcpp::Rcout << red << std::endl;
+
     // cublic_b_spoine :: vec.start, vec.end, start.time, step
-    boost::math::cubic_b_spline< double > spline_red(   red.begin(),   red.end(),   0, step );
-    boost::math::cubic_b_spline< double > spline_green( green.begin(), green.end(), 0, step );
-    boost::math::cubic_b_spline< double > spline_blue(  blue.begin(),  blue.end(),  0, step );
-    boost::math::cubic_b_spline< double > spline_alpha( alpha.begin(),  alpha.end(),  0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_red(   red.begin(),   red.end(),   0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_green( green.begin(), green.end(), 0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_blue(  blue.begin(),  blue.end(),  0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_alpha( alpha.begin(),  alpha.end(),  0, step );
 
     double this_x;
     int i, r, g, b;
@@ -49,6 +55,9 @@ namespace generate_colours {
         r = round( spline_red( this_x ) * 255 ) ;
         g = round( spline_green( this_x ) * 255 );
         b = round( spline_blue( this_x ) * 255 );
+
+        // Rcpp::Rcout << "this_x: " << this_x << std::endl;
+        // Rcpp::Rcout << "splined_r: " << r << std::endl;
 
         colourvalues::palette_utils::validate_rgb_spline(r);
         colourvalues::palette_utils::validate_rgb_spline(g);
@@ -93,10 +102,10 @@ namespace generate_colours {
     double step = 1 / ( colours - 1 );  // TODO(test)
 
     // cublic_b_spoine :: vec.start, vec.end, start.time, step
-    boost::math::cubic_b_spline< double > spline_red(   red.begin(),   red.end(),   0, step );
-    boost::math::cubic_b_spline< double > spline_green( green.begin(), green.end(), 0, step );
-    boost::math::cubic_b_spline< double > spline_blue(  blue.begin(),  blue.end(),  0, step );
-    boost::math::cubic_b_spline< double > spline_alpha( alpha.begin(), alpha.end(), 0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_red(   red.begin(),   red.end(),   0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_green( green.begin(), green.end(), 0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_blue(  blue.begin(),  blue.end(),  0, step );
+    boost::math::interpolators::cardinal_cubic_b_spline< double > spline_alpha( alpha.begin(), alpha.end(), 0, step );
 
     double this_x;
     int i, r, g, b;
