@@ -1,4 +1,9 @@
 
+# v0.3.5
+
+* return interleaved vectors (C++ only)
+* patch for failures on rdevel
+
 # v0.3.4
 
 * removed Boost dates
