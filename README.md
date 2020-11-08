@@ -1,6 +1,8 @@
 
 [![R build
 status](https://github.com/SymbolixAU/colourvalues/workflows/R-CMD-check/badge.svg)](https://github.com/SymbolixAU/colourvalues/actions)
+[![Codecov test
+coverage](https://codecov.io/gh/symbolixau/colourvalues/branch/master/graph/badge.svg)](https://codecov.io/gh/symbolixau/colourvalues?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colourvalues)](https://CRAN.R-project.org/package=colourvalues)
 ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/colourvalues)
 [![CRAN RStudio mirror
@@ -47,7 +49,7 @@ packages.
 ### Why do you spell colour with a ‘u’?
 
 Because it’s correct, and [R tells us
-to](http://developer.r-project.org/Rds.html)
+to](https://developer.r-project.org/Rds.html)
 
 > For consistency, aim to use British (rather than American) spelling
 
@@ -183,8 +185,7 @@ colour_palettes()
 ```
 
 And you can use `show_colours()` to view them all. Here’s what some of
-them look
-like
+them look like
 
 ``` r
 show_colours( colours = colour_palettes(c("viridis", "colorspace")))
@@ -284,11 +285,11 @@ summary
 ``` r
 colour_values(rnorm(n = 10), n_summaries = 3, digits = 2)
 # $colours
-#  [1] "#3EBC74FF" "#46337FFF" "#450457FF" "#440154FF" "#3C4E8AFF" "#32648EFF"
-#  [7] "#25858EFF" "#277E8EFF" "#FDE725FF" "#38578CFF"
+#  [1] "#51C469FF" "#25848EFF" "#3D4D8AFF" "#33628DFF" "#3A538BFF" "#2C718EFF"
+#  [7] "#440154FF" "#1F9E89FF" "#FDE725FF" "#218E8DFF"
 # 
 # $summary_values
-# [1] "-0.67" "0.69"  "2.04" 
+# [1] "-1.92" "0.27"  "2.47" 
 # 
 # $summary_colours
 # [1] "#440154FF" "#21908CFF" "#FDE725FF"
@@ -336,18 +337,18 @@ values, and their associated colours
 ``` r
 colour_values(sample(letters, size = 50, replace = T), summary = T)
 # $colours
-#  [1] "#3B528BFF" "#7AD151FF" "#DDE318FF" "#2F6C8EFF" "#2FB47CFF" "#BCDF27FF"
-#  [7] "#3B528BFF" "#440154FF" "#22A884FF" "#482575FF" "#2A788EFF" "#43BF71FF"
-# [13] "#3B528BFF" "#21908CFF" "#25848EFF" "#21908CFF" "#481466FF" "#7AD151FF"
-# [19] "#3B528BFF" "#345F8DFF" "#22A884FF" "#1E9C89FF" "#FDE725FF" "#481466FF"
-# [25] "#7AD151FF" "#5DC963FF" "#2A788EFF" "#5DC963FF" "#22A884FF" "#9AD93DFF"
-# [31] "#BCDF27FF" "#2A788EFF" "#BCDF27FF" "#481466FF" "#463480FF" "#2A788EFF"
-# [37] "#482575FF" "#9AD93DFF" "#3B528BFF" "#2A788EFF" "#DDE318FF" "#440154FF"
-# [43] "#482575FF" "#3B528BFF" "#43BF71FF" "#2FB47CFF" "#2FB47CFF" "#2A788EFF"
-# [49] "#414487FF" "#481466FF"
+#  [1] "#345F8DFF" "#414487FF" "#9AD93DFF" "#7AD151FF" "#414487FF" "#440154FF"
+#  [7] "#345F8DFF" "#22A884FF" "#345F8DFF" "#345F8DFF" "#9AD93DFF" "#414487FF"
+# [13] "#345F8DFF" "#481466FF" "#440154FF" "#DDE318FF" "#BCDF27FF" "#9AD93DFF"
+# [19] "#25848EFF" "#440154FF" "#345F8DFF" "#9AD93DFF" "#463480FF" "#BCDF27FF"
+# [25] "#482575FF" "#345F8DFF" "#1E9C89FF" "#9AD93DFF" "#5DC963FF" "#3B528BFF"
+# [31] "#345F8DFF" "#BCDF27FF" "#BCDF27FF" "#43BF71FF" "#21908CFF" "#43BF71FF"
+# [37] "#482575FF" "#2F6C8EFF" "#2FB47CFF" "#2A788EFF" "#463480FF" "#43BF71FF"
+# [43] "#463480FF" "#481466FF" "#481466FF" "#FDE725FF" "#43BF71FF" "#440154FF"
+# [49] "#481466FF" "#43BF71FF"
 # 
 # $summary_values
-#  [1] "a" "b" "c" "d" "e" "h" "j" "k" "l" "m" "o" "p" "q" "r" "s" "t" "u" "v" "x"
+#  [1] "a" "b" "d" "f" "g" "h" "i" "j" "k" "l" "m" "n" "p" "q" "s" "t" "u" "v" "w"
 # [20] "y" "z"
 # 
 # $summary_colours
@@ -421,8 +422,8 @@ m <- microbenchmark(
 m
 # Unit: seconds
 #          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 1.622644 1.686746 1.762074 1.767248 1.846088 1.881535    25
-#        scales 3.403781 3.549115 3.632887 3.576572 3.758701 4.112579    25
+#  colourvalues 1.695754 1.714815 1.761367 1.750085 1.768201 1.938267    25
+#        scales 3.549574 3.588193 3.667787 3.616344 3.718466 4.076591    25
 ```
 
 **1 million characters (26 unique values)**
@@ -444,6 +445,6 @@ m <- microbenchmark(
 m
 # Unit: milliseconds
 #          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 174.8044 178.7663 181.2752 179.7038 180.6311 208.8333    25
-#        scales 375.9720 391.3423 406.6993 403.6458 411.0125 450.1277    25
+#  colourvalues 180.8726 187.0247 192.5192 188.9598 190.0945 284.5871    25
+#        scales 379.6128 398.4951 409.0306 400.0631 403.0966 497.9629    25
 ```

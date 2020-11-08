@@ -1,3 +1,8 @@
+# v0.3.6
+
+* updated interleave code
+* validate `na_colour` hex input [issue70](https://github.com/SymbolixAU/colourvalues/issues/70)
+* Bug fixed for `na_colour` when `include_alpha = FALSE` [issue 69](https://github.com/SymbolixAU/colourvalues/issues/69)
 
 # v0.3.5
 

@@ -29,7 +29,6 @@ namespace api {
 
     int position = 0;
 
-
     // TODO: get format_type depending on the type of list elements
     std::string format_type = "character";
 
@@ -44,7 +43,10 @@ namespace api {
 
       if( summary ) {
         int option = 5;
-        Rcpp::warning("colourvalues - summary not valid for numeric values, using n_summaries = 5");
+        // issue 68 - removing this warning, because the user may not have know what the input object
+        // was, so has no way of knowhing which 'summary' type was used
+        // this is particularly true if this is called from {spatialwidget}
+        //Rcpp::warning("colourvalues - summary not valid for numeric values, using n_summaries = 5");
         n_summaries = std::min( total_size, option );
       }
 
@@ -70,9 +72,9 @@ namespace api {
     default: {
 
       if( n_summaries > 0 ) {
-      Rcpp::warning("colourvalues - n_summaries not valid for character values, using summary = T");
-      summary = true;
-    }
+        //Rcpp::warning("colourvalues - n_summaries not valid for character values, using summary = T");
+        summary = true;
+      }
 
       Rcpp::StringVector colours( total_size );
       colourvalues::list::unlist_list( lst, lst_sizes, colours, position );
@@ -120,9 +122,6 @@ namespace api {
 
     int position = 0;
 
-    //Rcpp::Rcout << "now doing list " << std::endl;
-
-
     // TODO: get format_type depending on the type of list elements
     std::string format_type = "character";
 
@@ -137,15 +136,14 @@ namespace api {
 
       if( summary ) {
         int option = 5;
-        Rcpp::warning("colourvalues - summary not valid for numeric values, using n_summaries = 5");
+        // issue 68
+        //Rcpp::warning("colourvalues - summary not valid for numeric values, using n_summaries = 5");
         n_summaries = std::min( total_size, option );
       }
 
-      //Rcpp::Rcout << "colouring values" << std::endl;
       SEXP coloured_values = colourvalues::colours_rgb::colour_value_rgb(
         colours, palette, na_colour, alpha, include_alpha, format_type, n_summaries, format, digits
       );
-      //Rcpp::Rcout << "coloured values" << std::endl;
 
       position = 0;
       Rcpp::NumericMatrix colour_matrix;
@@ -165,9 +163,9 @@ namespace api {
     default: {
 
       if( n_summaries > 0 ) {
-      Rcpp::warning("colourvalues - n_summaries not valid for character values, using summary = T");
-      summary = true;
-    }
+        Rcpp::warning("colourvalues - n_summaries not valid for character values, using summary = T");
+        summary = true;
+      }
 
       Rcpp::StringVector colours( total_size );
       colourvalues::list::unlist_list( lst, lst_sizes, colours, position );
@@ -210,8 +208,6 @@ namespace api {
       int n_summaries = 0
   ) {
 
-    //Rcpp::Rcout << "NumericVector x, SEXP palette " << std::endl;
-
     switch( TYPEOF( palette ) ) {
     // STringVector - needs to get std::string
     case STRSXP: {
@@ -253,7 +249,6 @@ namespace api {
       int digits = 2,
       bool summary = false
   ) {
-    //Rcpp::Rcout << "stringVector x, SEXP palette " << std::endl;
 
     switch( TYPEOF( palette ) ) {
     case STRSXP: {
@@ -295,48 +290,47 @@ namespace api {
       bool summary = false,
       int n_summaries = 0
   ) {
-    //Rcpp::Rcout << "SEXP x, NumericMatrix palette " << std::endl;
-    //Rcpp::Rcout << "include_alpha: " << include_alpha << std::endl;
 
     std::string format_type = colourvalues::format::get_format_type( x );
 
     switch( TYPEOF( x ) ) {
-    case INTSXP: {
-      if( Rf_isFactor( x ) ) {
+      case INTSXP: {
+        if( Rf_isFactor( x ) ) {
 
-      Rcpp::IntegerVector iv = Rcpp::as< Rcpp::IntegerVector >( x );
-      Rcpp::StringVector lvls = iv.attr("levels");
+        Rcpp::IntegerVector iv = Rcpp::as< Rcpp::IntegerVector >( x );
+        Rcpp::StringVector lvls = iv.attr("levels");
 
-      return colourvalues::colours_rgb::colour_value_rgb(
-        iv, lvls, palette, na_colour, include_alpha, summary
-      );
+        return colourvalues::colours_rgb::colour_value_rgb(
+          iv, lvls, palette, na_colour, include_alpha, summary
+        );
 
-    } else {
-      Rcpp::NumericVector nv = Rcpp::clone(x);
-      return colourvalues::colours_rgb::colour_value_rgb(
-        nv, palette, na_colour, include_alpha, format_type, n_summaries, format, digits
-      );
-    }
-    }
-    case REALSXP: {
-      Rcpp::NumericVector nv = Rcpp::as< Rcpp::NumericVector >( x );
-      return colourvalues::colours_rgb::colour_value_rgb(
-        nv, palette, na_colour, include_alpha, format_type, n_summaries, format, digits
-      );
-    }
-    case VECSXP: { // list
-      Rcpp::List lst = Rcpp::as< Rcpp::List >( x );
-      // TODO list
-      Rcpp::stop("colourvalues -  list not supported yet ");
+      } else {
+        Rcpp::NumericVector nv = Rcpp::clone(x);
+        return colourvalues::colours_rgb::colour_value_rgb(
+          nv, palette, na_colour, include_alpha, format_type, n_summaries, format, digits
+        );
+      }
+      }
+      case REALSXP: {
+        Rcpp::NumericVector nv = Rcpp::as< Rcpp::NumericVector >( x );
+        return colourvalues::colours_rgb::colour_value_rgb(
+          nv, palette, na_colour, include_alpha, format_type, n_summaries, format, digits
+        );
+      }
+      case VECSXP: { // list
+        Rcpp::List lst = Rcpp::as< Rcpp::List >( x );
+        return colour_values_rgb(
+          lst,  palette, alpha, na_colour, include_alpha, format, digits, summary, n_summaries
+        );
 
-    }
-    case LGLSXP: {} // as.character
-    default: {
-      Rcpp::StringVector sv = Rcpp::as< Rcpp::StringVector >( x );
-      return colourvalues::colours_rgb::colour_value_rgb(
-        sv, palette, na_colour, include_alpha, summary
-      );
-    }
+      }
+      case LGLSXP: {} // as.character
+      default: {
+        Rcpp::StringVector sv = Rcpp::as< Rcpp::StringVector >( x );
+        return colourvalues::colours_rgb::colour_value_rgb(
+          sv, palette, na_colour, include_alpha, summary
+        );
+      }
     }
 
   }
@@ -356,53 +350,47 @@ namespace api {
       int n_summaries = 0
   ) {
 
-    // Rcpp::Rcout << "SEXP x, StringVector palette " << std::endl;
-    // Rcpp::Rcout << "typeof x: " << TYPEOF( x ) << std::endl;
     std::string format_type = colourvalues::format::get_format_type( x );
 
     Rcpp::String p = palette[0];
     std::string pal = p;
 
     switch( TYPEOF( x ) ) {
-    case INTSXP: {
-      if( Rf_isFactor( x ) ) {
+      case INTSXP: {
+        if( Rf_isFactor( x ) ) {
 
-      //Rcpp::Rcout << "is factor " << std::endl;
+        Rcpp::IntegerVector iv = Rcpp::as< Rcpp::IntegerVector >( x );
+        Rcpp::StringVector lvls = iv.attr("levels");
 
-      Rcpp::IntegerVector iv = Rcpp::as< Rcpp::IntegerVector >( x );
-      Rcpp::StringVector lvls = iv.attr("levels");
+        return colourvalues::colours_rgb::colour_value_rgb(
+          iv, lvls, pal, na_colour, alpha, include_alpha, summary
+        );
 
-      return colourvalues::colours_rgb::colour_value_rgb(
-        iv, lvls, pal, na_colour, alpha, include_alpha, summary
-      );
+      } else {
+        Rcpp::NumericVector nv = Rcpp::clone(x);
+        return colourvalues::colours_rgb::colour_value_rgb(
+          nv, pal, na_colour, alpha, include_alpha, format_type, n_summaries, format, digits
+        );
+      }
+      }
+      case REALSXP: {
+        Rcpp::NumericVector nv = Rcpp::clone(x);
+        return colourvalues::colours_rgb::colour_value_rgb(
+          nv, pal, na_colour, alpha, include_alpha, format_type, n_summaries, format, digits
+        );
+      }
+      case VECSXP: { // list
+        Rcpp::List lst = Rcpp::as< Rcpp::List >( x );
+        return colour_values_rgb( lst, pal, alpha, na_colour, include_alpha, format, digits, summary, n_summaries );
 
-    } else {
-      Rcpp::NumericVector nv = Rcpp::clone(x);
-      return colourvalues::colours_rgb::colour_value_rgb(
-        nv, pal, na_colour, alpha, include_alpha, format_type, n_summaries, format, digits
-      );
-    }
-    }
-    case REALSXP: {
-      //Rcpp::NumericVector nv = Rcpp::as< Rcpp::NumericVector >( x );
-      Rcpp::NumericVector nv = Rcpp::clone(x);
-      return colourvalues::colours_rgb::colour_value_rgb(
-        nv, pal, na_colour, alpha, include_alpha, format_type, n_summaries, format, digits
-      );
-    }
-    case VECSXP: { // list
-      Rcpp::List lst = Rcpp::as< Rcpp::List >( x );
-      //Rcpp::Rcout << "starting list " << std::endl;
-      return colour_values_rgb( lst, pal, alpha, na_colour, include_alpha, format, digits, summary, n_summaries );
-
-    }
-    case LGLSXP: {} // as.character
-    default: {
-      Rcpp::StringVector sv = Rcpp::as< Rcpp::StringVector >( x );
-      return colourvalues::colours_rgb::colour_value_rgb(
-        sv, pal, na_colour, alpha, include_alpha, summary
-      );
-    }
+      }
+      case LGLSXP: {} // as.character
+      default: {
+        Rcpp::StringVector sv = Rcpp::as< Rcpp::StringVector >( x );
+        return colourvalues::colours_rgb::colour_value_rgb(
+          sv, pal, na_colour, alpha, include_alpha, summary
+        );
+      }
     }
 
     Rcpp::StringVector sv;
@@ -424,27 +412,25 @@ namespace api {
       int n_summaries = 0
   ) {
 
-    //Rcpp::Rcout << "SEXP x, SEXP palette " << std::endl;
-
     switch( TYPEOF( palette ) ) {
-    case INTSXP: {}
-    case REALSXP: {
-      Rcpp::NumericMatrix pal = Rcpp::as< Rcpp::NumericMatrix >( palette );
-      return colour_values_rgb(
-        x, pal, alpha, na_colour, include_alpha, format, digits, summary, n_summaries
-      );
-      break;
-    }
-    case STRSXP: {
-      Rcpp::StringVector sv = Rcpp::as< Rcpp::StringVector >( palette );
-      return colour_values_rgb(
-        x, sv, alpha, na_colour, include_alpha, format, digits, summary, n_summaries
-      );
-      break;
-    }
-    default: {
-      Rcpp::stop("colourvalues - Unknown palette type");
-    }
+      case INTSXP: {}
+      case REALSXP: {
+        Rcpp::NumericMatrix pal = Rcpp::as< Rcpp::NumericMatrix >( palette );
+        return colour_values_rgb(
+          x, pal, alpha, na_colour, include_alpha, format, digits, summary, n_summaries
+        );
+        break;
+      }
+      case STRSXP: {
+        Rcpp::StringVector sv = Rcpp::as< Rcpp::StringVector >( palette );
+        return colour_values_rgb(
+          x, sv, alpha, na_colour, include_alpha, format, digits, summary, n_summaries
+        );
+        break;
+      }
+      default: {
+        Rcpp::stop("colourvalues - Unknown palette type");
+      }
     }
 
     Rcpp::StringVector sv;
