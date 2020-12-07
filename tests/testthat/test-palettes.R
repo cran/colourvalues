@@ -10,18 +10,14 @@ test_that("palettes are returned", {
   for( palette in all_palettes ) {
     expect_silent( colour_values(1, palette = palette ))
     res <- colourvalues::get_palette( palette )
-    expect_true( ncol( res ) == 3 & nrow( res ) == 256 )
+    expect_true( ncol( res ) == 3 )
 
-    ## And call teh function directly
-    res <- eval(parse(text = paste0(palette, "()")))
+    ## And call the function directly
+    res <- eval(parse(text = paste0("colourvalues:::", palette, "()")))
     expect_true( ncol( res ) == 3 )
   }
 
   expect_error( colourvalues::get_palette("test"), "not a valid palette" )
-
-  # lns <- readLines("./R/palettes.R")
-  # funs <- lns[ grepl("function\\(\\) rcpp_", lns ) ]
-  # gsub(" .*", "", funs )
 
 })
 
