@@ -1,6 +1,6 @@
-a3cc4df005bacb01ce38aaeb5228d668 *DESCRIPTION
+c9fb827789b1cd7afdaaa3e14da1ab75 *DESCRIPTION
 55c7e0a0bff1d56d002eac8c7e72ca8f *NAMESPACE
-13e637c688f68d37634bc1cbdab503c5 *NEWS.md
+b5ac226e0c7ee8f2d51eb3a1effb40c3 *NEWS.md
 15a75631959ad2e4958fd45b5732ba54 *R/RcppExports.R
 c8126a14e618d084f2fea8a6146489d8 *R/colour_values_hex.R
 9938d157ec0bb515f986b2dc1689bf52 *R/colour_values_rgb.R
@@ -8,7 +8,7 @@ ebe581d75ecee983b6415b4f9ddb6ced *R/colourvalues-package.R
 b6609209d1b1ed621167205f90d91f14 *R/convert_colours.R
 4d7c323844f4c997b828f8f6e7780342 *R/palettes.R
 915bf7395a85441005d8e2055559430d *R/spline.R
-9ad72f1abac640144c4902468e0a4ccc *README.md
+fa60d0519ded814e204d19980e11ef27 *README.md
 6d50b537eef1226cad3777c81e654578 *inst/include/cardinal_cubic_b_spline.hpp
 7236127a6928d51625d5e5308b6385f0 *inst/include/colourvalues/alpha/alpha.hpp
 fab524ae723d7b88e729c082a8a0b804 *inst/include/colourvalues/api/api.hpp
@@ -78,7 +78,7 @@ bcdf020a962e7a9e9055efb402343d36 *inst/include/colourvalues/palettes/ylgn.hpp
 2f1afe587417ab6bcc06812db2ed5ec3 *inst/include/colourvalues/palettes/ylgnbu.hpp
 240cc3b3fd160714f3fd4bcd37794b7f *inst/include/colourvalues/palettes/ylorbr.hpp
 53a3d193113abc2f9fa6f6cbba9a7255 *inst/include/colourvalues/palettes/ylorrd.hpp
-bd839124433ccee84706c41d57476271 *inst/include/colourvalues/scale/scale.hpp
+6d6d3797bf0190afbd24c6483ea68c63 *inst/include/colourvalues/scale/scale.hpp
 6d36833ebd500f27cfa073c128479a4c *inst/include/colourvalues/summary/summary.hpp
 f35d832fb6db7f9b2fd391a9fe2edad8 *inst/include/colourvalues/utils/utils.hpp
 540804fe2572035df58fe885ce8c3d95 *man/blue2green.Rd
@@ -116,8 +116,8 @@ d6932ee8ee455673160454da5c0cdb7b *man/figures/README-unnamed-chunk-23-1.png
 c2b03a6a7721def3451afbe88f2bd82f *man/figures/README-unnamed-chunk-3-1.png
 957d6745ca64223bd9e83311a42e20c2 *man/figures/README-unnamed-chunk-4-1.png
 367991e94f27e4a0cc992be70e6d615f *man/figures/README-unnamed-chunk-5-1.png
-19108d6366128f9623771bb93c1151e6 *man/figures/README-unnamed-chunk-6-1.png
-cedab33c2087891ec40a31f0f2890cf2 *man/figures/README-unnamed-chunk-7-1.png
+1dfc58ebcc559bd35431796314b46040 *man/figures/README-unnamed-chunk-6-1.png
+37af8ef6db7b29eee1d6674178454186 *man/figures/README-unnamed-chunk-7-1.png
 41b1eb2f122508021ff5abfbe58dac30 *man/figures/README-unnamed-chunk-8-1.png
 5dc50124823c2c0f595c1ac0c709dacb *man/figures/README-unnamed-chunk-9-1.png
 c31fa4a8aa9c7935a4fa040124da32a8 *man/get_palette.Rd
@@ -164,9 +164,9 @@ cb29c97398bd8995029d8e5f5fa02a2e *man/ylorbr.Rd
 3a251a93db853e41c71a11dc1eb5b5fc *man/ylorrd.Rd
 a22eedee8f3fdff81b7c4cb87c147709 *src/ColourValues.cpp
 b03a8cc5f069de31d2bb03774b8a4d71 *src/ConvertColours.cpp
-2dfce4be47cd63b71001fe61fde4c83d *src/Makevars
-2dfce4be47cd63b71001fe61fde4c83d *src/Makevars.win
-4bb12226229fb00ec7762d52becb3268 *src/RcppExports.cpp
+179e7f2cc01824b38243cd64a10d0f57 *src/Makevars
+179e7f2cc01824b38243cd64a10d0f57 *src/Makevars.win
+a1baa43204fe65c9a766599bcf599a16 *src/RcppExports.cpp
 51e07a95ab3bcbafb1e3074e4816c368 *src/alpha.cpp
 55ebebb01f24db690dafceb9c18c9553 *src/format.cpp
 737e1965839ac3d3fe7c8e219290028d *src/list.cpp
@@ -176,7 +176,7 @@ db6c483dddb6f6e1b461f848a3e4139e *src/palettes.cpp
 d26fbcbdb665cc81e32c2690d1c2318d *tests/testthat.R
 d5241638a5c6546b8aec3f5e0667534a *tests/testthat/test-alpha.R
 8bd16bb09b124be9b526ab44d6aa631e *tests/testthat/test-api.R
-39f705b3909651cd8dcc2d5d8c4d031a *tests/testthat/test-colour_values_hex.R
+9fcfa1f15eaa12787bf5722c9ada35eb *tests/testthat/test-colour_values_hex.R
 94dcc9b1c0ca76eccb450bd12733321a *tests/testthat/test-colour_values_rgb.R
 9e75cd3690d6f4abdd11798aa1c0fca2 *tests/testthat/test-convert_colours.R
 34953c29948feb22f306d13d2cdb809b *tests/testthat/test-factors.R

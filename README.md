@@ -2,8 +2,8 @@
 [![R build
 status](https://github.com/SymbolixAU/colourvalues/workflows/R-CMD-check/badge.svg)](https://github.com/SymbolixAU/colourvalues/actions)
 [![Codecov test
-coverage](https://codecov.io/gh/symbolixau/colourvalues/branch/master/graph/badge.svg)](https://codecov.io/gh/symbolixau/colourvalues?branch=master)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/colourvalues)](https://CRAN.R-project.org/package=colourvalues)
+coverage](https://codecov.io/gh/symbolixau/colourvalues/branch/master/graph/badge.svg)](https://app.codecov.io/gh/symbolixau/colourvalues?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/colourvalues)](https://CRAN.R-project.org/package=colourvalues)
 ![downloads](http://cranlogs.r-pkg.org/badges/grand-total/colourvalues)
 [![CRAN RStudio mirror
 downloads](http://cranlogs.r-pkg.org/badges/colourvalues)](https://CRAN.R-project.org/package=colourvalues)
@@ -16,11 +16,11 @@ Stars](https://img.shields.io/github/stars/SymbolixAU/colourvalues.svg?style=soc
 
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" height="200" />
 
------
+------------------------------------------------------------------------
 
 ### What does it do?
 
-It maps viridis colours (by default) to values, and quickly\!
+It maps viridis colours (by default) to values, and quickly!
 
 **Note** It does not perform a 1-to-1 mapping of a palette to values. It
 interpolates the colours from a given palette.
@@ -29,8 +29,8 @@ interpolates the colours from a given palette.
 
 I’m aware there are other methods for mapping colours to values. And
 which do it quick too. But I can never remember them, and I find the
-interfaces a bit cumbersome. For example, `scales::col_numeric(palette =
-viridisLite::viridis(5), domain = range(1:5))(1:5)`.
+interfaces a bit cumbersome. For example,
+`scales::col_numeric(palette = viridisLite::viridis(5), domain = range(1:5))(1:5)`.
 
 I wanted **one** function which will work on **one** argument.
 
@@ -44,18 +44,18 @@ colour_values(letters[1:5])
 I also want it available at the `src` (C/C++) level for linking to other
 packages.
 
------
+------------------------------------------------------------------------
 
 ### Why do you spell colour with a ‘u’?
 
 Because it’s correct, and [R tells us
-to](https://developer.r-project.org/Rds.html)
+to](https://developer.R-project.org/Rds.html)
 
 > For consistency, aim to use British (rather than American) spelling
 
 But don’t worry, `color_values(1:5)` works as well
 
------
+------------------------------------------------------------------------
 
 ### How do I install it?
 
@@ -73,7 +73,7 @@ Or install the development version from
 devtools::install_github("SymbolixAU/colourvalues")
 ```
 
------
+------------------------------------------------------------------------
 
 ### How can I make use of it in my package?
 
@@ -115,7 +115,7 @@ any other.
 
 ## Do you have any examples?
 
-Of course\!
+Of course!
 
 #### 256 numbers mapped to a colour
 
@@ -150,7 +150,7 @@ bar_plot( df )
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" height="200" />
 
-Eurgh\!
+Eurgh!
 
 ``` r
 df <- df[with(df, order(x)), ]
@@ -159,9 +159,9 @@ bar_plot( df )
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" height="200" />
 
-That’s better\!
+That’s better!
 
------
+------------------------------------------------------------------------
 
 ## Are there only viridis palettes?
 
@@ -285,11 +285,11 @@ summary
 ``` r
 colour_values(rnorm(n = 10), n_summaries = 3, digits = 2)
 # $colours
-#  [1] "#51C469FF" "#25848EFF" "#3D4D8AFF" "#33628DFF" "#3A538BFF" "#2C718EFF"
-#  [7] "#440154FF" "#1F9E89FF" "#FDE725FF" "#218E8DFF"
+#  [1] "#31688EFF" "#34608DFF" "#2AAF7FFF" "#26838EFF" "#2F6A8EFF" "#21A585FF"
+#  [7] "#482576FF" "#FDE725FF" "#440154FF" "#3E4A89FF"
 # 
 # $summary_values
-# [1] "-1.92" "0.27"  "2.47" 
+# [1] "-2.29" "-0.30" "1.68" 
 # 
 # $summary_colours
 # [1] "#440154FF" "#21908CFF" "#FDE725FF"
@@ -337,18 +337,18 @@ values, and their associated colours
 ``` r
 colour_values(sample(letters, size = 50, replace = T), summary = T)
 # $colours
-#  [1] "#345F8DFF" "#414487FF" "#9AD93DFF" "#7AD151FF" "#414487FF" "#440154FF"
-#  [7] "#345F8DFF" "#22A884FF" "#345F8DFF" "#345F8DFF" "#9AD93DFF" "#414487FF"
-# [13] "#345F8DFF" "#481466FF" "#440154FF" "#DDE318FF" "#BCDF27FF" "#9AD93DFF"
-# [19] "#25848EFF" "#440154FF" "#345F8DFF" "#9AD93DFF" "#463480FF" "#BCDF27FF"
-# [25] "#482575FF" "#345F8DFF" "#1E9C89FF" "#9AD93DFF" "#5DC963FF" "#3B528BFF"
-# [31] "#345F8DFF" "#BCDF27FF" "#BCDF27FF" "#43BF71FF" "#21908CFF" "#43BF71FF"
-# [37] "#482575FF" "#2F6C8EFF" "#2FB47CFF" "#2A788EFF" "#463480FF" "#43BF71FF"
-# [43] "#463480FF" "#481466FF" "#481466FF" "#FDE725FF" "#43BF71FF" "#440154FF"
-# [49] "#481466FF" "#43BF71FF"
+#  [1] "#22A884FF" "#3B528BFF" "#2FB47CFF" "#414487FF" "#2F6C8EFF" "#7AD151FF"
+#  [7] "#345F8DFF" "#3B528BFF" "#5DC963FF" "#481466FF" "#9AD93DFF" "#3B528BFF"
+# [13] "#DDE318FF" "#2F6C8EFF" "#482575FF" "#21908CFF" "#1E9C89FF" "#21908CFF"
+# [19] "#5DC963FF" "#22A884FF" "#414487FF" "#FDE725FF" "#BCDF27FF" "#481466FF"
+# [25] "#481466FF" "#1E9C89FF" "#25848EFF" "#22A884FF" "#43BF71FF" "#345F8DFF"
+# [31] "#2A788EFF" "#482575FF" "#DDE318FF" "#414487FF" "#2A788EFF" "#7AD151FF"
+# [37] "#345F8DFF" "#440154FF" "#22A884FF" "#414487FF" "#440154FF" "#440154FF"
+# [43] "#FDE725FF" "#414487FF" "#7AD151FF" "#2A788EFF" "#7AD151FF" "#481466FF"
+# [49] "#2FB47CFF" "#463480FF"
 # 
 # $summary_values
-#  [1] "a" "b" "d" "f" "g" "h" "i" "j" "k" "l" "m" "n" "p" "q" "s" "t" "u" "v" "w"
+#  [1] "a" "b" "c" "e" "f" "g" "h" "i" "k" "m" "n" "o" "p" "r" "s" "t" "u" "w" "x"
 # [20] "y" "z"
 # 
 # $summary_colours
@@ -400,7 +400,7 @@ lapply( l, colour_values )
 # [1] "#440154FF" "#3B528BFF" "#21908CFF" "#5DC963FF" "#FDE725FF"
 ```
 
------
+------------------------------------------------------------------------
 
 ### What’s the performance like?
 
@@ -421,9 +421,9 @@ m <- microbenchmark(
 )
 m
 # Unit: seconds
-#          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 1.695754 1.714815 1.761367 1.750085 1.768201 1.938267    25
-#        scales 3.549574 3.588193 3.667787 3.616344 3.718466 4.076591    25
+#          expr      min       lq    mean   median       uq      max neval
+#  colourvalues 1.627894 1.701427 1.77096 1.738952 1.794650 2.208553    25
+#        scales 3.490133 3.570589 3.66930 3.622581 3.714103 4.094268    25
 ```
 
 **1 million characters (26 unique values)**
@@ -445,6 +445,6 @@ m <- microbenchmark(
 m
 # Unit: milliseconds
 #          expr      min       lq     mean   median       uq      max neval
-#  colourvalues 180.8726 187.0247 192.5192 188.9598 190.0945 284.5871    25
-#        scales 379.6128 398.4951 409.0306 400.0631 403.0966 497.9629    25
+#  colourvalues 176.1218 178.7141 186.3045 184.7679 188.3816 223.6415    25
+#        scales 375.1857 394.0583 411.6228 406.9435 423.1733 485.9965    25
 ```
