@@ -1,8 +1,8 @@
 Package: colourvalues
 Type: Package
 Title: Assigns Colours to Values
-Version: 0.3.8
-Date: 2023-02-04
+Version: 0.3.9
+Date: 2023-04-09
 Authors@R: c(
     person("David", "Cooley", ,"dcooley@symbolix.com.au", role = c("aut", "cre"))
     )
@@ -23,8 +23,8 @@ Imports: graphics, Rcpp (>= 1.0.10)
 RoxygenNote: 7.2.3
 Suggests: covr, microbenchmark, scales, testthat, viridisLite
 NeedsCompilation: yes
-Packaged: 2023-02-06 20:53:23 UTC; galileo
+Packaged: 2023-04-08 22:43:01 UTC; david
 Author: David Cooley [aut, cre]
 Maintainer: David Cooley <dcooley@symbolix.com.au>
 Repository: CRAN
-Date/Publication: 2023-02-06 22:02:30 UTC
+Date/Publication: 2023-04-11 01:20:13 UTC
