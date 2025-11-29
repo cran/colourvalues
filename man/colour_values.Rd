@@ -9,6 +9,7 @@
 \alias{colour_values_to_hex.Date}
 \alias{colour_values_to_hex.POSIXct}
 \alias{colour_values_to_hex.POSIXlt}
+\alias{colour_values_to_hex.default}
 \title{Colour Values}
 \usage{
 colour_values(
@@ -106,16 +107,28 @@ color_values(
   format,
   digits
 )
+
+\method{colour_values_to_hex}{default}(
+  x,
+  palette,
+  alpha,
+  na_colour,
+  include_alpha,
+  summary,
+  n_summaries,
+  format,
+  digits
+)
 }
 \arguments{
 \item{x}{vector of values to map to a colour}
 
 \item{palette}{colour palette. See details and examples}
 
-\item{alpha}{optional. Single value in [0,255] applied to all colours,
+\item{alpha}{optional. Single value in \code{[0,255]} applied to all colours,
 or a decimal in [0, 1) (to indicate a percentage, noting 1 is excluded),
 or a vector of numeric values the same length as \code{x}.
-The numeric vector will be scaled into the range [0,255].
+The numeric vector will be scaled into the range \code{[0,255]}.
 If a matrix palette is supplied this argument is ignored.}
 
 \item{na_colour}{hex string colour to use for NA values in the form \code{#RRGGBBAA}.}
@@ -140,8 +153,8 @@ maps colours to values, returning a vector of hex strings
 \details{
 The palette can either be
 \itemize{
-  \item{String - }{use \code{colour_palettes()} to view available palettes}
-  \item{Matrix - }{At least 5 rows, and 3 (or 4) columns representing the red, green and blue (and alpha) values}
+\item String - use \code{colour_palettes()} to view available palettes
+\item Matrix - At least 5 rows, and 3 (or 4) columns representing the red, green and blue (and alpha) values
 }
 
 The matrix \code{palette} requires 5 rows because the colours are interpolated using a
